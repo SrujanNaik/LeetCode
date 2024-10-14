@@ -4,21 +4,18 @@
 class Solution {
 public:
 	std::vector<int> resultsArray(std::vector<int>& nums, int k) {
-        	std::vector<int> result;
-		int valid = 1;
 		int Snums = nums.size();
-		for(int i = k;i < Snums+1;i++){
-			for(int j = i-k+1;j < i;j++){
-				if(nums[j-1]+1 == nums[j]){
-					valid++;
-				}
-			}
-			if(valid == k){
-				result.push_back(nums[i-1]);
-				valid = 1;
+		int n = Snums;
+        	std::vector<int> result(n-k+1,-1);
+		int valid = 0;
+		for(int i = 0;i < Snums;i++){
+			if(i && nums[i-1]+1 == nums[i]){
+				valid++;
 			}else{
-				result.push_back(-1);
-				valid = 1;
+				valid = 0;
+			}
+			if(valid >= k-1){
+				result[i-k+1]=nums[i];
 			}
 		}
 		return result;
